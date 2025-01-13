@@ -65,7 +65,6 @@ const doesFileSupportPreview = (fileName: string) => {
   const supportedMimeTypes = [
     mimeType.startsWith("video/"),
     mimeType.startsWith("image/"),
-    mimeType.startsWith("audio/"),
     mimeType.startsWith("text/"),
     mimeType == "application/pdf",
   ];
