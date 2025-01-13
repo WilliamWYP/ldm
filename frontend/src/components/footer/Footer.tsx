@@ -28,13 +28,13 @@ const Footer = () => {
       <SimpleGrid cols={isMobile ? 2 : 3} m={0}>
         {!isMobile && <div></div>}
         <Text size="xs" color="dimmed" align={isMobile ? "left" : "center"}>
-          Paaaar{" "}
+          {" "}
           <Anchor
             size="xs"
             href="https://github.com/stonith404/pingvin-share"
             target="_blank"
           >
-            Pingvin Share
+            
           </Anchor>
         </Text>
         <div>
