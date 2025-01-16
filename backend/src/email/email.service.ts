@@ -68,10 +68,10 @@ export class EmailService {
       this.config
         .get("email.shareRecipientsMessage")
         .replaceAll("\\n", "\n")
-        .replaceAll("{creator}", creator?.username ?? "Someone")
+        .replaceAll("{creator}", creator?.username ?? "Quelqu'un")
         .replaceAll("{creatorEmail}", creator?.email ?? "")
         .replaceAll("{shareUrl}", shareUrl)
-        .replaceAll("{desc}", description ?? "No description")
+        .replaceAll("{desc}", description ?? "Pas de description")
         .replaceAll(
           "{expires}",
           moment(expiration).unix() != 0
@@ -79,6 +79,20 @@ export class EmailService {
             : "in: never",
         ),
     );
+    // Send confirmation email to the sender (creator)
+      await this.sendMail(
+        creator.email,
+        "Ton fichier à été envoyer mon reuf", // Subject line
+        `Salut ${creator.username ?? "User"},\n\n` +
+          `Ton fichier à été partager avec ${recipientEmail}.\n` +
+          `Voici le lien: ${shareUrl}\n\n` +
+          `Description: ${description ?? "Pas de description"}\n` +
+          `Expire dans: ${
+            moment(expiration).unix() != 0 ? moment(expiration).fromNow() : "Jamais"
+          }\n\n` +
+          `Merci brotheeer`
+      );
+    }
   }
 
   async sendMailToReverseShareCreator(recipientEmail: string, shareId: string) {
